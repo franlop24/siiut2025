@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 
 from .models import Quarter
 from .forms import QuarterForm
@@ -41,6 +41,8 @@ def quarter_update(request, q_id):
             q.quarter_name = form.cleaned_data['quarter_name']
             q.save()
             return redirect('career:quarter_list')
+        else:
+            return HttpResponse('Hay error en el formulario')
     else:
         form = QuarterForm(instance=q)
         return render(request, 
