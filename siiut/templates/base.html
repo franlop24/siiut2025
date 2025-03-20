@@ -8,9 +8,9 @@
 </head>
 <body>
     {% include 'shared/header.html' %}
-    <div class="px-6 py-2 flex gap-4">
+    <div class="container m-auto flex">
         {% include 'shared/menu.html' %}
-        <main class="container">
+        <main class="w-full p-6">
             {% block content %}
             {% endblock %}
         </main>
