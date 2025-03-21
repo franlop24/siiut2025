@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 
-from .models import Quarter, Level, Career
+from .models import Quarter, Level, Career, Subject
 from .forms import QuarterForm, LevelForm, CareerForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -117,3 +117,25 @@ class CareerUpdateView(UpdateView):
 class CareerDeleteView(DeleteView):
     model = Career
     success_url = reverse_lazy('career:career_list')
+
+
+# Views for Subject Model
+class SubjectListView(ListView):
+    model = Subject
+    paginate_by = 5
+    template_name = 'career/subject/index.html'
+    context_object_name = 'subjects'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        id_career = self.kwargs.get('career_id')
+        queryset = queryset \
+            .filter(career__id=id_career) \
+            .order_by('quarter')
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        career = Career.objects.get(pk=self.kwargs.get('career_id'))
+        context['career'] = career
+        return context

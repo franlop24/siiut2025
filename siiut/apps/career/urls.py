@@ -20,5 +20,7 @@ urlpatterns = [
     path('career/create/', views.CareerCreateView.as_view(), name='career_create'),
     path('career/<int:pk>/details/', views.CareerDetailView.as_view(), name='career_details'),
     path('career/<int:pk>/update/', views.CareerUpdateView.as_view(), name='career_update'),
-    path('career/<int:pk>/delete/', views.CareerDeleteView.as_view(), name='career_delete')
+    path('career/<int:pk>/delete/', views.CareerDeleteView.as_view(), name='career_delete'),
+
+    path('subject/<int:career_id>/', views.SubjectListView.as_view(), name='subject_list'),
 ]
