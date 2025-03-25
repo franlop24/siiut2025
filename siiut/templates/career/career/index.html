@@ -22,13 +22,19 @@
     <tbody>
         {% for career in careers %}
         <tr class="border-b-2 border-gray-300 hover:bg-gray-100">
-            <td class="py-4"><a href="{% url 'career:career_details' career.id %}">{{ career.id }}</a></td>
+            <td class="py-4">{{ forloop.counter }}</td>
             <td>{{ career.name }}</td>
             <td>{{ career.short_name }}</td>
             <td>{{ career.level }}</td>
             <td>{{ career.principal }}</td>
             <td>{{ career.year }}</td>
-            <td>Acciones</td>
+            <td>
+                <a 
+                    class="text-sky-600 ml-4"
+                    href="{% url 'career:career_details' career.id %}">
+                    <i class="ri-file-list-line ri-lg"></i>
+                </a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
